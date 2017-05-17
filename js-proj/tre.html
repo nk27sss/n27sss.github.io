@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>Формула Герона</title>
+    <link rel="stylesheet" type="text/css" href="style1.css">
+</head>
+
+<body>
+    <form name="forma3">
+        Сторона 1: <input type="text" size="8" maxlength="8" name="st1">;
+        Сторона 2: <input type="text" size="8" maxlength="8" name="st2">;
+        Сторона 3: <input type="text" size="8" maxlength="8" name="st3">;
+        <br>
+        <br>
+        <input type="button" value="Вычислить" onClick="areaOfTriangle(forma3);">
+        <input type="reset" value="Отменить"> Результат
+        <input type="text" size="20" maxlength="8" name="res">
+    </form>
+</body>
+<script type="text/javascript">
+function areaOfTriangle(obj) {
+    var a = 1 * obj.st1.value;
+    var b = 1 * obj.st2.value;
+    var c = 1 * obj.st3.value;
+    var p = (a + b + c) / 2;
+    var s = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    obj.res.value = s;
+}
+</script>
+
+</html>

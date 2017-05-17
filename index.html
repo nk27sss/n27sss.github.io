@@ -1,18 +1,38 @@
 <html>
+
 <head>
-    <title></title>
+    <title>NK27sss</title>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
-<body>
-<h3>Список ресурсов</h3>
-<hr align="left" width="200">
-<ul>
-	<li><a href="/ImgaDesktop/index.html">ImgaDesktop</a></li>
-	<li><a href=""></a></li>
-	<li><a href=""></a></li>
-	<li><a href=""></a></li>
-	<li><a href=""></a></li>
-</ul>
+<body onload="list();">
+    <h3>Список ресурсов</h3>
+    <hr align="left" width="200">
+    <ul>
+        <li><a href="/ImgaDesktop/index.html">ImgaDesktop</a></li>
+        <li><a href="/Eval.html">Eval</a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+    </ul>
+    <div onclick="list();" id="divs"></div>
 </body>
+<script type="text/javascript">
+function list(){
+	document.getElementById('divs').innerHTML = ShowFolderList(window.location.href);
+}
+function ShowFolderList(path) {
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+    var folder = fso.GetFolder(path);
+    var subFlds = new Enumerator(folder.SubFolders);
+
+    var s = "";
+    for (; !subFlds.atEnd(); subFlds.moveNext()) {
+        s += subFlds.item()
+        s += "<br />";
+    }
+    return (s);
+}
+</script>
 
 </html>

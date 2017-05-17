@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <title>eval calculator</title>
+    <style type="text/css">
+    * {
+        background: #000;
+        color: #080;
+        font-family: "consolas"
+    }
+    </style>
+</head>
+
+<body>
+    <form id="f">
+        <textarea rows="5" style="width: 100%;" oninput="try{document.getElementById('ret').innerHTML=eval(this.value);}catch(e){document.getElementById('ret').innerHTML='@@@'+e;}"></textarea>
+        <br>
+        <br>
+        <b>Ответ: </b>
+        <label id="ret"></label>
+    </form>
+</body>
+
+</html>
