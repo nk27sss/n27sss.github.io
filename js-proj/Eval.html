@@ -1,19 +1,21 @@
 <html>
 
 <head>
-    <title>eval calculator</title>
+    <title>eval</title>
     <style type="text/css">
     * {
         background: #000;
         color: #080;
+        border-color: #888;
         font-family: "consolas"
     }
     </style>
 </head>
 
 <body>
+    <h4>Калькулятор Eval()</h4>
     <form id="f">
-        <textarea rows="5" style="width: 100%;" oninput="try{document.getElementById('ret').innerHTML=eval(this.value);}catch(e){document.getElementById('ret').innerHTML='@@@'+e;}"></textarea>
+        <textarea rows="5" style="max-width: 100%; width: 100%; " oninput="try{document.getElementById('ret').innerHTML=eval(this.value);}catch(e){document.getElementById('ret').innerHTML='@@@'+e;}"></textarea>
         <br>
         <br>
         <b>Ответ: </b>
