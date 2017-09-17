@@ -75,7 +75,7 @@
 		<div id="buttons">
 			Виды шифрования:
 			<br>
-			<button onclick="tabch(0);">тест</button>
+			<button onclick="tabch(0);">очистить</button>
 			<button onclick="tabch(1);">строчно-столбцовое шифрование</button>
 			<button onclick="tabch(2);">'др шифрование'</button>
 		</div>
@@ -124,7 +124,18 @@ function tabch(typ) {
 	switch (typ) {
 		case 0:
 			{
-				console.log(m1);
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						m1[i][j] = 0;
+					}
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						m2[i][j] = 0;
+					}
+
+				setTab("t1", m1);
+				setTab("t2", m2);
+
 			}
 			break;
 		case 1:
@@ -158,11 +169,9 @@ function getTab(tabId, edit = true) {
 
 	return ar;
 }
+
 function getElTab(tabId, row, cell, edit = true) {
-	if (edit)
-		{return document.getElementById(tabId).rows[row].cells[cell].getElementsByTagName("input")[0].value;}
-	else
-		{return document.getElementById(tabId).rows[row].cells[cell].innerHTML;}
+	if (edit) { return document.getElementById(tabId).rows[row].cells[cell].getElementsByTagName("input")[0].value; } else { return document.getElementById(tabId).rows[row].cells[cell].innerHTML; }
 }
 
 function setTab(tabId, valAr, edit = true) {
@@ -170,11 +179,9 @@ function setTab(tabId, valAr, edit = true) {
 		for (var i = 0; i < width; i++)
 			setElTab(tabId, j, i, valAr[i][j], edit);
 }
+
 function setElTab(tabId, row, cell, val, edit = true) {
-	if (edit)
-		{document.getElementById(tabId).rows[row].cells[cell].getElementsByTagName("input")[0].value = val;}
-	else
-		{document.getElementById(tabId).rows[row].cells[cell].innerHTML = val;}
+	if (edit) { document.getElementById(tabId).rows[row].cells[cell].getElementsByTagName("input")[0].value = val; } else { document.getElementById(tabId).rows[row].cells[cell].innerHTML = val; }
 }
 
 
