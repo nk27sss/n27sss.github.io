@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Шифры</title>
+	<style>
+	.tab {
+		border-spacing: 0px;
+		font-size: 12px;
+	}
+
+	.tab td {
+		border: 1px solid #cdcdcd;
+		background: #f8f8f8;
+		padding: 5px 10px;
+		margin: 0;
+	}
+
+	.tab .l {
+		margin: 0;
+		padding: 0;
+		width: 20px;
+		height: 20px;
+	}
+
+	.tab input {
+
+		height: 20px;
+		width: 20px;
+		border: 0 none;
+		text-align: center;
+	}
+
+	.lin {
+		display: inline-block;
+		padding: 5px;
+	}
+
+	.tex {
+		width: 48%;
+		height: 80px;
+	}
+	</style>
+	<script type="text/javascript" src="cipher-table.js"></script>
+</head>
+
+<body>
+	<h1>Шифрующие таблицы</h1>
+	<p>Введите фразу для шифрования:
+		<center>
+			<input type="button" value="Зашифровать" onclick="ciphertable(this)">
+		</center>
+	</p>
+	<textarea id="txt" class="lin tex" placeholder="Введите текст..." onkeyup="chars()"></textarea>
+	<textarea id="xtx" class="lin tex" readonly placeholder="Здесь будет шифр..."></textarea>
+	<p>Количество символов: <span id="chars">x</span>.</p>
+	<p>Размер шифрующей таблицы:
+		<input id="wt" value="7" size="4"> X
+		<input id="ht" value="5" size="4"> .
+		<input type="button" value="Применить" onclick="tablecreate();">
+		<div>
+			<div class="lin">
+				<p>Шифрующая записывающая таблица:</p>
+				<table id="t1" class="tab"></table>
+			</div>
+			<div class="lin">
+				<p>Шифрующая считывающая таблица:</p>
+				<table id="t2" class="tab"></table>
+			</div>
+			<div class="lin">
+				<p>Таблица с символами:</p>
+				<table id="v1" class="tab"></table>
+			</div>
+		</div>
+		<div id="buttons">
+			Виды шифрования:
+			<br>
+			<button onclick="tabch(0);">тест</button>
+			<button onclick="tabch(1);">строчно-столбцовое шифрование</button>
+			<button onclick="tabch(2);">'др шифрование'</button>
+		</div>
+</body>
+<script type="text/javascript">
+//glob
+var m1, m2, v1, txt, xtx, width, height;
+
+
+tablecreate();
+
+
+function tablecreate() {
+	width = document.getElementById('wt').value;
+	height = document.getElementById('ht').value;
+
+	m1 = matrixArray(height, width);
+	m2 = matrixArray(height, width);
+	v1 = matrixArray(height, width);
+
+	document.getElementById("t1").innerHTML = txTbCr(1);
+	document.getElementById("t2").innerHTML = txTbCr(2);
+
+	document.getElementById("v1").innerHTML = txTbCr(3, 0);
+
+
+}
+
+function txTbCr(id, edit = true) {
+	write = "";
+	for (var j = 0; j < height; j++) {
+		write += '<tr>';
+		for (var i = 0; i < width; i++) {
+			if (edit)
+				write += '<td class="l"><i><input type="text" onkeyup="edinp(' + id + ')"></i></td>';
+			else
+				write += '<td class="l"></td>';
+		}
+		write += '</tr>';
+
+	}
+	return write;
+}
+
+function tabch(typ) {
+	switch (typ) {
+		case 0:
+			{
+				console.log(m1);
+			}
+			break;
+		case 1:
+			{
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						m1[i][j] = i + j * width;
+					}
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						m2[i][j] = j + i * height;
+					}
+
+				setTab("t1", m1);
+				setTab("t2", m2);
+			}
+			break;
+		case 2:
+			{
+
+			}
+			break;
+	}
+}
+
+function getTab(tabId, edit = true) {
+	ar = matrixArray(height, width);
+	for (var j = 0; j < height; j++)
+		for (var i = 0; i < width; i++)
+			ar[i][j] = getElTab(tabId, j, i, edit);
+
+	return ar;
+}
+function getElTab(tabId, row, cell, edit = true) {
+	if (edit)
+		{return document.getElementById(tabId).rows[row].cells[cell].getElementsByTagName("input")[0].value;}
+	else
+		{return document.getElementById(tabId).rows[row].cells[cell].innerHTML;}
+}
+
+function setTab(tabId, valAr, edit = true) {
+	for (var j = 0; j < height; j++)
+		for (var i = 0; i < width; i++)
+			setElTab(tabId, j, i, valAr[i][j], edit);
+}
+function setElTab(tabId, row, cell, val, edit = true) {
+	if (edit)
+		{document.getElementById(tabId).rows[row].cells[cell].getElementsByTagName("input")[0].value = val;}
+	else
+		{document.getElementById(tabId).rows[row].cells[cell].innerHTML = val;}
+}
+
+
+function matrixArray(rows, columns) {
+	var arr = new Array();
+	for (var i = 0; i < columns; i++) {
+		arr[i] = new Array();
+		for (var j = 0; j < rows; j++) {
+			arr[i][j] = null;
+		}
+	}
+	return arr;
+}
+
+function chars() {
+	txt = document.getElementById('txt').value;
+	document.getElementById('chars').innerHTML = txt.length;
+}
+
+function cipChar() {
+	document.getElementById('xtx').innerHTML = xtx;
+}
+
+function edinp(t) {
+	switch (t) {
+		case 1:
+			m1 = getTab('t1');
+			break;
+		case 2:
+			m2 = getTab('t2');
+			break;
+	}
+}
+
+function ciphertable() {
+
+	for (var j = 0; j < height; j++)
+		for (var i = 0; i < width; i++) {
+			v1[i][j] = (m1[i][j] + 1 > txt.length) ? "." : txt[+m1[i][j]];
+		}
+	var x = [];
+	for (var j = 0; j < height; j++)
+		for (var i = 0; i < width; i++) {
+			x[+m2[i][j]] = (m2[i][j] < 0) ? "." : v1[i][j];
+		}
+	setTab("v1", v1, 0);
+	xtx = x.join('');
+
+	cipChar();
+
+
+}
+</script>
+<span id="conout">
+	
+</span>
+
+</html>
