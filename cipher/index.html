@@ -155,7 +155,8 @@ function tabch(typ) {
 			break;
 		case 2:
 			{
-
+				setTab("t1", m1);
+				setTab("t2", m2);
 			}
 			break;
 	}
@@ -220,9 +221,9 @@ function ciphertable() {
 
 	for (var j = 0; j < height; j++)
 		for (var i = 0; i < width; i++) {
-			v1[i][j] = (m1[i][j] + 1 > txt.length) ? "." : txt[+m1[i][j]];
+			v1[i][j] = (m1[i][j] > txt.length) ? "." : txt[+m1[i][j]];
 		}
-	var x = [];
+	var x = Array(height*width).join('.').split('');
 	for (var j = 0; j < height; j++)
 		for (var i = 0; i < width; i++) {
 			x[+m2[i][j]] = (m2[i][j] < 0) ? "." : v1[i][j];
