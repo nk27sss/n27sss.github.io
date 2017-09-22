@@ -77,8 +77,13 @@
 			<br>
 			<button onclick="tabch(0);">очистить</button>
 			<button onclick="tabch(1);">строчно-столбцовое шифрование</button>
-			<button onclick="tabch(2);">'др шифрование'</button>
+			<button onclick="tabch(2);">столбцо-строчное шифрование</button>
+			<button onclick="tabch(3);">Поменять местами</button>
+			<button onclick="tabch(4);">Ввести занчения строкой</button>
+			<button onclick="tabch(5);">'др шифрование'</button>
 		</div>
+		<hr>
+		<div id="ret"> </div>
 </body>
 <script type="text/javascript">
 //glob
@@ -144,18 +149,63 @@ function tabch(typ) {
 					for (var i = 0; i < width; i++) {
 						m1[i][j] = i + j * width;
 					}
+				setTab("t1", m1);
+
 				for (var j = 0; j < height; j++)
 					for (var i = 0; i < width; i++) {
 						m2[i][j] = j + i * height;
 					}
-
-				setTab("t1", m1);
 				setTab("t2", m2);
 			}
 			break;
 		case 2:
 			{
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						m1[i][j] = j + i * width;
+					}
+				setTab("t1", m1);
+
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						m2[i][j] = i + j * height;
+					}
+				setTab("t2", m2);
+			}
+			break;
+		case 3:
+			{
+				mx = m1;
+				m1 = m2;
+				m2 = mx;
+				delete mx;
+
+				setTab("t1", m1);
+				setTab("t2", m2);
+			}
+			break;
+		case 4:
+			{
+				ml1 = Array();
+				ml2 = Array();
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						ml1[i + j * width] = m1[i][j];
+						ml2[i + j * width] = m2[i][j];
+					};
+
+				result1 = prompt("Введите массив 1 (через пробел)", ml1.join(' '));
+				if (result1 != "") ml1 = result1.split(' ', width * height);
 				
+				result2 = prompt("Введите массив 2 (через пробел)", ml2.join(' '));
+				if (result2 != "") ml2 = result2.split(' ', width * height);
+
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						m1[i][j] = (ml1[i + j * width] != null) ? ml1[i + j * width] : '';
+						m2[i][j] = (ml2[i + j * width] != null) ? ml2[i + j * width] : '';
+					}
+
 				setTab("t1", m1);
 				setTab("t2", m2);
 			}
@@ -222,9 +272,9 @@ function ciphertable() {
 
 	for (var j = 0; j < height; j++)
 		for (var i = 0; i < width; i++) {
-			v1[i][j] = ((+m1[i][j]+1) > txt.length) ? "." : txt[+m1[i][j]];
+			v1[i][j] = ((+m1[i][j] + 1) > txt.length) ? "." : txt[+m1[i][j]];
 		}
-	var x = Array(height*width).join('.').split('');
+	var x = Array(height * width).join('.').split('');
 	for (var j = 0; j < height; j++)
 		for (var i = 0; i < width; i++) {
 			x[+m2[i][j]] = (m2[i][j] < 0) ? "." : v1[i][j];
