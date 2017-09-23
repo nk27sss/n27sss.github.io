@@ -156,8 +156,8 @@ function tabch(typ) {
 			{
 				for (var j = 0; j < height; j++)
 					for (var i = 0; i < width; i++) {
-						m1[i][j] = j + i * width;
-						m2[i][j] = i + j * height;
+						m1[i][j] = j + i * height;
+						m2[i][j] = i + j * width;
 					}
 				setTab("t1", m1);
 				setTab("t2", m2);
@@ -205,7 +205,7 @@ function tabch(typ) {
 				}
 				for (var j = 0; j < height; j++)
 					for (var i = 0; i < width; i++) {
-						m2[i][j] = i + j * height;
+						m2[i][j] = i + j * width;
 					}
 
 				setTab("t1", m1);
@@ -234,7 +234,7 @@ function tabch(typ) {
 				
 				for (var j = 0; j < height; j++)
 					for (var i = 0; i < width; i++) {
-						m2[i][j] = i + j * height;
+						m2[i][j] = i + j * width;
 				}
 
 
