@@ -24,7 +24,6 @@
 	}
 
 	.tab input {
-
 		height: 20px;
 		width: 20px;
 		border: 0 none;
@@ -78,12 +77,14 @@
 			<button onclick="tabch(0);">очистить</button>
 			<button onclick="tabch(1);">строчно-столбцовое шифрование</button>
 			<button onclick="tabch(2);">столбцо-строчное шифрование</button>
-			<button onclick="tabch(3);">Поменять местами</button>
-			<button onclick="tabch(4);">Ввести занчения строкой</button>
-			<button onclick="tabch(5);">'др шифрование'</button>
+			<button onclick="tabch(3);">шифрование змейкой</button>
+			<button onclick="tabch(4);">шифрование зигзагом</button>
+			<button onclick="tabch(5);">Поменять местами</button>
+			<button onclick="tabch(6);">Ввести занчения строкой</button>
+			<button onclick="tabch(7);">'др шифрование'</button>
 		</div>
 		<hr>
-		<div id="ret"> </div>
+		<pre><div id="ret"> </div></pre>
 </body>
 <script type="text/javascript">
 //glob
@@ -132,9 +133,6 @@ function tabch(typ) {
 				for (var j = 0; j < height; j++)
 					for (var i = 0; i < width; i++) {
 						m1[i][j] = 0;
-					}
-				for (var j = 0; j < height; j++)
-					for (var i = 0; i < width; i++) {
 						m2[i][j] = 0;
 					}
 
@@ -148,13 +146,9 @@ function tabch(typ) {
 				for (var j = 0; j < height; j++)
 					for (var i = 0; i < width; i++) {
 						m1[i][j] = i + j * width;
-					}
-				setTab("t1", m1);
-
-				for (var j = 0; j < height; j++)
-					for (var i = 0; i < width; i++) {
 						m2[i][j] = j + i * height;
 					}
+				setTab("t1", m1);
 				setTab("t2", m2);
 			}
 			break;
@@ -163,17 +157,92 @@ function tabch(typ) {
 				for (var j = 0; j < height; j++)
 					for (var i = 0; i < width; i++) {
 						m1[i][j] = j + i * width;
-					}
-				setTab("t1", m1);
-
-				for (var j = 0; j < height; j++)
-					for (var i = 0; i < width; i++) {
 						m2[i][j] = i + j * height;
 					}
+				setTab("t1", m1);
 				setTab("t2", m2);
 			}
 			break;
 		case 3:
+			{
+				n = Math.min(width,height);
+				verh = 0;
+				niz = n - 1;
+				levo = 0;
+				pravo = n - 1;
+				i = j = s = 1;
+
+				while (s <= n * n) {
+					i = pravo;
+					j = niz;
+
+					for (j = pravo; j >= levo; j--) {
+						m1[i][j] = s;
+						s++;
+					}
+					pravo--;
+					j = verh;
+
+					for (i = pravo; i >= levo; i--) {
+						m1[i][j] = s;
+						s++;
+					}
+					verh++;
+					i = levo;
+
+					for (j = verh; j <= niz; j++) {
+						m1[i][j] = s;
+						s++;
+					}
+					levo++;
+					j = niz;
+
+					for (i = levo; i <= pravo; i++) {
+						m1[i][j] = s;
+						s++;
+					}
+					niz--;
+				}
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						m2[i][j] = i + j * height;
+					}
+
+				setTab("t1", m1);
+				setTab("t2", m2);
+			}
+			break;
+		case 4:
+			{
+				/*count = 0; 
+				n = Math.min(width,height);
+				maxtrix = n * n; 
+				for (i = 0; i < n; i++){ 
+					x = i; 
+					if (i % 2) 
+					for (j = 0 ; j <= i; j++, x--) { 
+						m1[x][j] = count++; 
+						m1[n - 1 - x][n - 1 - j] = (maxtrix - count + 1);
+					} 
+					else 
+					for (j = 0 ; j <= i; j++, x--) { 
+						m1[j][x] = count++; 
+						m1[n - 1 - j][n - 1 - x] = (maxtrix - count + 1); 
+					}
+					//m1[i][n-i]-=1;
+				}*/
+				
+				for (var j = 0; j < height; j++)
+					for (var i = 0; i < width; i++) {
+						m2[i][j] = i + j * height;
+				}
+
+
+				setTab("t1", m1);
+				setTab("t2", m2);
+			}
+			break;
+		case 5:
 			{
 				mx = m1;
 				m1 = m2;
@@ -184,7 +253,7 @@ function tabch(typ) {
 				setTab("t2", m2);
 			}
 			break;
-		case 4:
+		case 6:
 			{
 				ml1 = Array();
 				ml2 = Array();
@@ -196,7 +265,7 @@ function tabch(typ) {
 
 				result1 = prompt("Введите массив 1 (через пробел)", ml1.join(' '));
 				if (result1 != "") ml1 = result1.split(' ', width * height);
-				
+
 				result2 = prompt("Введите массив 2 (через пробел)", ml2.join(' '));
 				if (result2 != "") ml2 = result2.split(' ', width * height);
 
@@ -210,9 +279,9 @@ function tabch(typ) {
 				setTab("t2", m2);
 			}
 			break;
-		case 5:
+		case 7:
 			{
-				ef = prompt("Введите функцию (массивы m1 и m2)", 'mx=m1;m1=m2;m2=mx;');
+				ef = prompt("Введите функцию js (массивы m1 и m2)", 'for (j=0;j<height;j++)for(i=0;i<width;i++){  m1[i][j]=j+i*width;m2[i][j]=i+j*height;  }');
 				eval(ef);
 				setTab("t1", m1);
 				setTab("t2", m2);
