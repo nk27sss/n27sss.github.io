@@ -1,0 +1,89 @@
+* {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+html,
+body {
+	height: 100vh;
+}
+
+
+body {
+	background-color: #E6EAED;
+}
+
+footer {
+	margin-top: 50px;
+	width: 100%;
+	bottom: 0px;
+}
+
+hr {
+	border: none;
+	color: #006AB8;
+	background-color: #006AB8;
+	height: 1px;
+}
+
+
+
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: #FEFEFE;
+}
+
+.navbar-inverse {
+	background: #006AB8;
+}
+
+.panel,
+.panel-heading {
+	border-radius: 0;
+}
+
+
+@media (min-width: 1000px) {
+	.mycontent-left {
+		border-right: 1px solid #006AB8;
+	}
+}
+
+
+
+input[type='checkbox'].icon-checkbox {
+	display: none
+}
+
+input[type='checkbox'].icon-checkbox+label .unchecked {
+	display: inline
+}
+
+input[type='checkbox'].icon-checkbox+label .checked {
+	display: none
+}
+
+input[type='checkbox']:checked.icon-checkbox {
+	display: none
+}
+
+input[type='checkbox']:checked.icon-checkbox+label .unchecked {
+	display: none
+}
+
+input[type='checkbox']:checked.icon-checkbox+label .checked {
+	display: inline
+}
+
+
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+	border: 1px solid #006AB8;
+	border-bottom-color: transparent;
+}

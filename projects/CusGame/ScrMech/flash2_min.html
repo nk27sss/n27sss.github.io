@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Создание JSON Flash v2</title>
+	<style type="text/css">
+ * { background: #000; color: #0d0; font-family: "Consolas"; font-size: 16px; line-height: 1.1; -moz-tab-size: 2; -o-tab-size: 2; tab-size: 2; } #content { background-color: #000; background: repeating-linear-gradient( #39392F, #39392F 1px, #272822 1px, #272822 17px); } #textar { padding: 5px; border: 2px solid #080; } .t_div { left: 0; right: 0; padding: 5px; }
+	</style>
+</head>
+<body>
+	<div>
+		<input type="button" value="Отладчик и просмотр" id="otliprosmotr" onclick='viewurl()'>
+		<input type="button" value="Вид кода (Normal/Pre)" onclick='tagalka()'>
+		<input type="button" value="Скопировать Всё" onclick='copylka()'>
+		<a id="downloadfile" href="" download="blueprint.json">Файл: blueprint.json</a>
+		<div class="t_div">
+			<div id="textar" contenteditable="true" onblur="text_format()">
+			</div>
+		</div>
+		<input type="button" value="Выполнить" onclick='start()'> Кодировка:
+		<select id="codirovka" title="Кодировка">
+			<option value="HEX">HEX (2 символа на байт) 0..F</option>
+			<option value="BIN">BIN (8 символов на байт) 0..1</option>
+			<option value="ASCII">ASCII</option>
+		</select>
+		Выравнивать:
+		<input type="checkbox" id="tex_form">
+	</div>
+	<hr>
+	<pre id='content'></pre>
+	<script type='text/javascript'>
+	var content=document.getElementById("content");var textar=document.getElementById("textar");var codir=document.getElementById("codirovka");var bitline=[];var dbuger=0;var textcode="";var pVAR,pREQ,pOUT,pW,pR,siW,orO,ioRe,regN,mem;var size=8;function viewurl(){dbuger=!dbuger;viewdbuger()};function viewdbuger(){if(dbuger){tagalka("pre");document.getElementById("otliprosmotr").style="color:#f00";document.getElementById("downloadfile").style="display: none"}else{tagalka("normal");document.getElementById("otliprosmotr").style="";document.getElementById("downloadfile").style="display: normal"}};function start(){enablecomments=dbuger;try{var etx=exec();viewdbuger();if(dbuger){content.innerHTML=etx.replace(/    /g,"\t")}else{etxns=etx.replace(/\s/g,'');content.innerHTML=etxns;document.getElementById("downloadfile").href="data:text/plain;charset=utf-8,%EF%BB%BF"+encodeURIComponent(etxns)}}catch(e){content.innerHTML="<b>Ошибка</b> "+e.name+":"+e.message+"\n"}};function codirovka(cod=codir.value){var temptext=textar.innerText;switch(cod){case"BIN":textcode=temptext.replace(/[^0-1]/gim,'');return textcode.split('');break;case"HEX":textcode=parseInt(("f"+temptext).replace(/[^0-9a-f]/gim,'').toLowerCase(),16).toString(2).split('');textcode.splice(0,4);return textcode;break;default:textcode=parseInt((" "+temptext).bin2hex(),16).toString(2).split('');textcode.splice(0,6);return textcode;break}return textcode.split('')};String.prototype.bin2hex=function(){var i=0,l=this.length,chr,hex='';for(i;i<l;++i){_chr=this.charCodeAt(i);if(_chr>0xFF){_chr-=0x350}chr=_chr.toString(16);hex+=chr.length<2?'0'+chr:chr}return hex};function text_format(enable=document.getElementById("tex_form").checked){if(enable&&(codir.value=="HEX"||codir.value=="BIN")){var temptext=textar.innerText;var spliter;if(codir.value=="HEX"){spliter=[2,8];temptext=temptext.replace(/[^0-9a-f]/gim,'').toLowerCase()}else{spliter=[8,2];temptext=temptext.replace(/[^0-1]/gim,'')}var str="";var i=0;while(i<temptext.length){if(i%spliter[0]==0&&i!=0){if(i%(spliter[0]*spliter[1])==0){str+="\n"+temptext.substr(i,1)}else{str+=" "+temptext.substr(i,1)}}else{str+=temptext.substr(i,1)}i++}textar.innerText=str}}function tagalka(st){if(st){content.style.whiteSpace=st}else{content.style.whiteSpace=(content.style.whiteSpace=="normal")?"pre":"normal"}}function copylka(){var range=document.createRange();range.selectNode(content);window.getSelection().addRange(range);try{var successful=document.execCommand('copy');var msg=successful?'successful':'unsuccessful';console.log('Copy email command was '+msg)}catch(err){console.log('Oops, unable to copy')}window.getSelection().removeAllRanges()}function Gett(){var qd={},qs={};for(var s=location.search.substr(1).split('&'),i=0;item=s[i];i++)qd[item.split('=')[0]]=decodeURIComponent(item.split('=')[1]);return{get:function(k){return(k in qd)?qd[k]:qd},set:function(k,v){qs[k]=v;return this},toString:function(){var k,res=[];for(k in qs)qd[k]=qs[k];for(k in qd)if(qd[k]!==null)res.push(k+'='+encodeURIComponent(qd[k]));return res.join('&')},ass:function(){location.search=this.toString()},rm:function(){qs={}},qd:qd}}function gate(x,y,z,id,controllerslist,mode,color="df7f00",comment="",xaxis=-1,zaxis=2,active=false,shapeId="9f0f56e8-2c31-4d83-996c-d00a9b296c3f"){gateobj={color:color,controller:{active:active,controllers:null,id:id,joints:null,mode:mode},pos:{x:-x,y:y,z:z},shapeId:shapeId,xaxis:xaxis,zaxis:zaxis};if(comment&&enablecomments){gateobj._comment_=comment};if(controllerslist){controllerslist=convertToSimpleArray(controllerslist);clist=[];for(var i=0;i<controllerslist.length;i++){clist[i]={id:controllerslist[i]}}}else{clist=null}gateobj["controller"]["controllers"]=clist;return gateobj}function convertToSimpleArray(array){var res=[];for(var i=0;i<array.length;i++)if(!Array.isArray(array[i]))res.push(array[i]);else res=res.concat(convertToSimpleArray(array[i]));return res}function arrCycle(istart,repeat,step=1){arr=[];for(var i=0;i<repeat;i++){arr[i]=istart+i*step}return arr}function binary(dig,id,step=1,io=0){razz=[];for(var i=0;i<size;i++){if((i%Math.pow(2,dig+1)>=Math.pow(2,dig+1)/2)^io){razz[razz.length]=id+step*i}}return razz}function exec(){bitline=codirovka();bitline=convertToSimpleArray(bitline);size=Math.ceil(bitline.length/8);var massiv={bodies:[{childs:[]}],version:2};var idd=iddlink=1000;var obj=[];function AddObj(ar){return obj[obj.length]=ar}pREQ=iddlink;iddlink+=8;pOUT=iddlink;iddlink+=8;ioRe=iddlink;iddlink+=16;regN=iddlink;iddlink+=size;idd=pREQ;for(var i=0;i<8;i++)AddObj(gate(i,1,2,idd++,[ioRe+i*2,ioRe+i*2+1],1,"0a3ee2","@REQ "+i+"@",-3,-1));idd=pOUT;for(var i=0;i<8;i++)AddObj(gate(i,1,1,idd++,null,1,"19e753","@OUT "+i+"@",-3,-1));idd=ioRe;for(var i=0;i<8;i++){AddObj(gate(i,1,0,idd++,binary(i,regN,1,0),1,"222222","@io- "+i+"@"));AddObj(gate(i,1,1,idd++,binary(i,regN,1,1),4,"222222","@io+ "+i+"@"))}idd=regN;alert(bitline);for(var i=0;i<size;i++){var mer=[];for(var u=0;u<8;u++){if(bitline[i*8+u]=="1")mer[mer.length]=pOUT+u}if(mer==[])mer=null;AddObj(gate(i%8,Math.floor(i/8)+2,0,idd++,mer,0,"e2db13","@RegNMem "+i+"@"))}massiv["bodies"][0]["childs"]=obj;return JSON.stringify(massiv,"",4)}
+	</script>
+</body>
+
+</html>

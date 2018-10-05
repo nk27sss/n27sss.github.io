@@ -1,0 +1,126 @@
+﻿<html>
+
+<head>
+	<title>N27sss</title>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link href="css/style.css" rel="stylesheet">
+	<script src="js/jquery-3.0.0.min.js"></script>
+
+</head>
+
+<body>
+	<canvas id="canva"></canvas>
+	<center>
+		<div class="content">
+			<center class="tit"><h1>Список ресурсов</h1></center>
+				<center>
+					<div id="prjs_block">
+						
+					</div>
+				</center>
+		</div>
+	</center>
+<script type="text/javascript">
+
+
+$.getJSON('list.json', function(data) {
+	var contents=data.contents;
+	var addcon='';
+	for (var k in contents) {
+		addcon = "<div class='prjs_contents'>";
+		var asp=contents[k];
+		if (asp.titl!='') {
+			col = (asp.col!='') ? ('style="color:#'+asp.col+'"'):'';
+			addcon += '<center class="tit"><h3 '+col+'>'+asp.titl+'</h3></center>';
+		}
+		for (var k in asp.prjs) {
+			var elem = asp.prjs[k];
+
+			nam = (elem.nam!='') ? elem.nam : '...';
+			desc = (elem.desc!='') ? elem.desc+'\n' : '';
+			dd = (elem.dd!='') ? elem.dd : '';
+			img = (elem.img!='') ? elem.img : 'projects/images/0.png';
+			link = elem.link;
+			col = (elem.col!='') ? ('style="color:#'+asp.col+'"'):'';
+
+			addcon += '<div class="prjs_links" onclick="location.href=\''+link+'\';" title="'+desc+dd+'"><img src="'+img+'">  <div class="prjs_titl" '+col+'>'+nam+'</div>  </div>\n';
+		}
+		addcon += '</div>\n';
+		$('#prjs_block').append(addcon);
+	}
+});
+
+
+
+
+
+
+/* CANVAS BACKGROUND */	
+//initial
+var canva = document.getElementById("canva");
+var w = canva.width = window.innerWidth,
+	h = canva.height = window.innerHeight,
+	ctx = canva.getContext('2d'),
+
+	//parameters
+	total = w / 2,
+	accelleration = .05,
+
+	//afterinitial calculations
+	size = w / total,
+	occupation = w / total,
+	repaintColor = 'rgba(0, 0, 0, .04)'
+colors = [],
+	dots = [],
+	dotsVel = [];
+
+//setting the colors' hue
+//and y level for all dots
+var portion = 360 / total * 5;
+//var portion=360/7*6;
+for (var i = 0; i < total; ++i) {
+	colors[i] = portion * i;
+
+	dots[i] = h;
+	dotsVel[i] = 10;
+}
+
+function anim() {
+	window.requestAnimationFrame(anim);
+
+	ctx.fillStyle = repaintColor;
+	ctx.fillRect(0, 0, w, h);
+
+	for (var i = 0; i < total; ++i) {
+		var currentY = dots[i] - 1;
+		dots[i] += dotsVel[i] += accelleration;
+
+		ctx.fillStyle = 'hsl(' + colors[i] + ', 80%, 50%)';
+		ctx.fillRect(occupation * i, currentY, size, dotsVel[i] + 1);
+
+		if (dots[i] > h && Math.random() < .01) {
+			dots[i] = dotsVel[i] = 0;
+		}
+	}
+
+
+
+	var time1;
+	window.onresize = function(e) {
+		if (time1)
+			clearTimeout(time1);
+		time1 = setTimeout(function() {
+			intervalID = window.setInterval(correct, time);
+		}, 700);
+	}
+
+
+}
+anim();
+</script>
+</body>
+
+</html>
