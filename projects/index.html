@@ -45,17 +45,13 @@ $.getJSON('list.json', function(data) {
 			img = (elem.img!='') ? elem.img : 'projects/images/0.png';
 			link = elem.link;
 			col = (elem.col!='') ? ('style="color:#'+asp.col+'"'):'';
-
-			addcon += '<div class="prjs_links" onclick="window.open(\''+link+'\',\'_blank\')" title="'+desc+dd+'"><img src="'+img+'">  <div class="prjs_titl" '+col+'>'+nam+'</div>  </div>\n';
+			click = (elem.isnewpage) ? 'window.open(\''+link+'\',\'_blank\')' : 'location.href=\''+link+'\'';
+			addcon += '<div class="prjs_links" onclick="'+click+'" title="'+desc+dd+'"><img src="'+img+'">  <div class="prjs_titl" '+col+'>'+nam+'</div>  </div>\n';
 		}
 		addcon += '</div>\n';
 		$('#prjs_block').append(addcon);
 	}
 });
-
-
-
-
 
 
 /* CANVAS BACKGROUND */	
