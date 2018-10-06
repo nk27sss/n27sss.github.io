@@ -1,4 +1,4 @@
-﻿<html>
+<html>
 
 <head>
 	<title>N27sss</title>
@@ -46,7 +46,7 @@ $.getJSON('list.json', function(data) {
 			link = elem.link;
 			col = (elem.col!='') ? ('style="color:#'+asp.col+'"'):'';
 
-			addcon += '<div class="prjs_links" onclick="location.href=\''+link+'\';" title="'+desc+dd+'"><img src="'+img+'">  <div class="prjs_titl" '+col+'>'+nam+'</div>  </div>\n';
+			addcon += '<div class="prjs_links" onclick="window.open(\''+link+'\',\'_blank\')" title="'+desc+dd+'"><img src="'+img+'">  <div class="prjs_titl" '+col+'>'+nam+'</div>  </div>\n';
 		}
 		addcon += '</div>\n';
 		$('#prjs_block').append(addcon);
