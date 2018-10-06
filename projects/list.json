@@ -7,7 +7,8 @@
 				"nam" : "Kaz-internet - управление тарифами",
 				"desc" : "Веб ресурс позволяющий управлять тарифами доступа интернет",
 				"dd": "Разработанн в качестве дипломной работы и прохождения практики",
-				"link" : "http://n27sss.000webhostapp.com/projects/DemoWeb/kaz-internet/",
+				"link" : "DemoWeb/kaz-internet/",
+				"isnewpage" : true,
 				"img" : "images/kaz-internet.png",
 				"col" : ""
 			},
@@ -15,7 +16,8 @@
 				"nam" : "Онлайн магазин Emarket",
 				"desc" : "Онлайн магазин компьютерной электоники",
 				"dd": "Разработанн во время прохождения практики от университета",
-				"link" : "http://n27sss.000webhostapp.com/projects/DemoWeb/Emarket/",
+				"link" : "DemoWeb/Emarket/",
+				"isnewpage" : true,
 				"img" : "images/Emarket.png",
 				"col" : ""
 			},
@@ -23,7 +25,8 @@
 				"nam" : "АРМ сотрудника кафеды.",
 				"desc" : "Позволяет преподователям ВУЗа управление документацией учебных планов групп",
 				"dd": "Разработанн для кафедры университета",
-				"link" : "http://n27sss.000webhostapp.com/projects/DemoWeb/isemd/",
+				"link" : "DemoWeb/isemd/",
+				"isnewpage" : true,
 				"img" : "images/isemd.png",
 				"col" : ""
 			},
@@ -31,7 +34,8 @@
 				"nam" : "БД ВУ ОАП УВД",
 				"desc" : "Мониторинг и управление выдачей водительских удостоверений ОАП УВД",
 				"dd": "Разработанн во время прохождения практики от университета",
-				"link" : "http://n27sss.000webhostapp.com/projects/DemoWeb/practika-db-vu/",
+				"link" : "DemoWeb/practika-db-vu/",
+				"isnewpage" : true,
 				"img" : "images/practika-db-vu.png",
 				"col" : ""
 			}
@@ -45,7 +49,8 @@
 				"nam" : "Eval - калькулятор",
 				"desc" : "Консольный онлайн калькулятор работающий на основе функции Eval()",
 				"dd": "",
-				"link" : "http://n27sss.000webhostapp.com/projects/JSProj/Eval.html",
+				"link" : "JSProj/Eval.html",
+				"isnewpage" : true,
 				"img" : "images/Eval.png",
 				"col" : ""
 			},
@@ -53,7 +58,8 @@
 				"nam" : "Программа для шифрования методом квадратов",
 				"desc" : "Является оригинальным инструментом простого шифрования.",
 				"dd": "Разработанна во время учебы просто так)",
-				"link" : "http://n27sss.000webhostapp.com/projects/JSProj/cipher.html",
+				"link" : "JSProj/cipher.html",
+				"isnewpage" : true,
 				"img" : "images/cipher.png",
 				"col" : ""
 			},
@@ -61,7 +67,8 @@
 				"nam" : "Другие проекты",
 				"desc" : "",
 				"dd": "",
-				"link" : "http://n27sss.000webhostapp.com/projects/JSProj/",
+				"link" : "JSProj/",
+				"isnewpage" : true,
 				"img" : "images/404.png",
 				"col" : ""
 			}
@@ -75,7 +82,8 @@
 				"nam" : "Проги для построения моделек для игры ScrapMechanic",
 				"desc" : "Проги для построения моделек для игры ScrapMechanic",
 				"dd": "Просто так",
-				"link" : "CusGame/ScrMech/",
+				"link" : "https://nk27sss.github.io/projects/CusGame/ScrMech/",
+				"isnewpage" : false,
 				"img" : "images/ScrMech.png",
 				"col" : ""
 			},
@@ -83,7 +91,8 @@
 				"nam" : "Разработанные игры и програмки",
 				"desc" : " Игры разработанны на программе GameMaker",
 				"dd": "Разработанно в школьные годы",
-				"link" : "CusGame/GM/",
+				"link" : "https://nk27sss.github.io/projects/CusGame/GM/",
+				"isnewpage" : false,
 				"img" : "images/GM.png",
 				"col" : ""
 			}
